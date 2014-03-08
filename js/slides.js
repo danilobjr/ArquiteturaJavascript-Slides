@@ -217,7 +217,8 @@ function buildNextItem() {
     return false;
   }
 
-  toBuild[0].classList.remove('to-build', '');
+  //toBuild[0].classList.remove('to-build', '');
+  toBuild[0].classList.remove('to-build');
 
   if (isChromeVoxActive()) {
     speakAndSyncToNode(toBuild[0]);
