@@ -78,7 +78,7 @@ $(function () {
 		var jsFilesContainer = $(this)
 			.closest('section')
 			.children('div:last')
-			.children().fadeOut('slow', showElementosChildren);
+			.children().fadeOut('fast', showElementosChildren);
 	});
 	
 	$('figure.show-view-usuario-viewmodel-children').click(function () {

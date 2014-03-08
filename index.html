@@ -1,1039 +1,811 @@
-
-<!DOCTYPE html>
-
 <!--
-  Google HTML5 slide template
+Google IO 2012/2013 HTML5 Slide Template
 
-  Authors: Luke MahÈ (code)
-           Marcin Wichary (code and design)
-           
-           Dominic Mazzoni (browser compatibility)
-           Charles Chen (ChromeVox support)
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mah√© <lukem@google.com>
 
-  URL: http://code.google.com/p/html5slides/
+URL: https://code.google.com/p/io-2012-slides
 -->
-
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Presentation</title>
+<head>
+  <title>Arquitetura JavaScript</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
 
-    <meta charset='iso-8859-1' />
-	<script src="js/jquery-1.5.1.min.js"></script>
-    <script src='js/slides.js'></script>
-	<script src='js/behavior.js'></script>
-  </head>
-  
-  <style>
-    /* Your individual styles here, or just use inline styles if thatís
-       what you want. */
+<slides class="layout-widescreen">
+
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/ivia-logo.png"></span>
+    </article>
+  </slide>
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Agenda</h2>
+    </hgroup>
+    <article>
+      <ul class="build fade">
+        <li>Javascript: Por que se preocupar?</li>
+        <li>Orienta√ß√£o a Objetos</li>
+        <li>Namespaces</li>
+        <li>Objetos Literais</li>
+        <li>Sugest√£o de Arquitetura</li>
+        <li>Demos</li>        
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>JavaScript</h2>
+      <h3>Por que se preocupar?</h3>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>JavaScript</h2>
+      <h3>Por que se preocupar?</h3>
+    </hgroup>
+    <article>
+      <div class="js-files">
+        <div>
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+        </div>
+      </div>
     
+      <div class="js-files build">
+        <div>
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+        </div>
+      </div>
     
-  </style>
+      <div class="js-files build">
+        <div>
+          <img src="images/html_file.png" />
+          <img src="images/html_file.png" />
+          <img src="images/html_file.png" />
+          <img src="images/html_file.png" />
+          <img src="images/html_file.png" />
+          <img src="images/html_file.png" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" class="invisible" />
+          <img src="images/html_file.png" />
+          <img src="images/html_file.png" />
+          <img src="images/html_file.png" />            
+          <img src="images/html_file.png" />        
+          <img src="images/html_file.png" />
+          <img src="images/html_file.png" />
+        </div>
+      </div>
+    
+      <div class="js-files build">
+        <div class="js-files-last-content">
+          <div>
+            <img src="images/html_file.png" />          
+            <img src="images/arrow-right.png" id="arrow" />
+            <img src="images/js_file.png" />
+          </div>
+        </div>
+      </div>
+    
+      <div class="js-files build">
+        <div>
+          <img src="images/js_file.png" />
+          <img src="images/js_file.png" />
+          <img src="images/js_file.png" />
+          <img src="images/js_file.png" />
+          <img src="images/js_file.png" />
+          <img src="images/js_file.png" />
+          <img src="images/js_file.png" />
+          <img src="images/js_file.png" />
+          <img src="images/js_file.png" />
+          <img src="images/js_file.png" />
+          <img src="images/js_file.png" />
+          <img src="images/js_file.png" />            
+          <img src="images/js_file.png" />        
+          <img src="images/js_file.png" />
+          <img src="images/js_file.png" />
+        </div>
+      </div>
+    </article>
+  </slide>
 
-  <body style='display: none'>
+  <slide>
+    <hgroup class="flexbox vcenter">
+      <h2 class="centered">E o que fazer?</h2> 
+      <h3 class='build'><span>Organizar o c√≥digo de forma l√≥gica e estruturadamente.</span></h3>
+    </hgroup>
+  </slide>
 
-    <section class='slides layout-regular template-default'>
-      
-      <!-- Your slides (<article>s) go here. Delete or comment out the
-           slides below. -->
-        
-        
-      
-      <!--<article class='biglogo'>
-      </article>-->
+  <slide>
+    <article>
+      <hgroup>
+        <h2>Logicamente</h2>
+      </hgroup>
+      <br/>
+      <ul class="build fade">
+        <li>Orienta√ß√£o a Objetos</li>
+        <li>Namespaces</li>
+        <li>Boas pr√°ticas</li>
+      </ul>
+      <hgroup class='build'>
+        <h2>Estruturalmente</h2>
+      </hgroup>
+      <br />
+      <ul class="build fade">
+        <li>Convencionando a organiza√ß√£o do c√≥digo em pastas e arquivos</li>
+      </ul>
+    </article>
+  </slide>
 
-		<article>
-			<header>
-				<h1>Arquitetura Javascript</h1>
-				<h2>Estruturando cÛdigo com
-					<br/>
-					orientaÁ„o a objetos e namespaces
-				</h2>
-			</header>
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Orienta√ß√£o a Objetos</h2>
+      <h3>Em JavaScript?!</h3>
+    </hgroup>
+  </slide>
 
-			<footer>Danilo Jr.</footer>
-		</article>
-      
-		<article>
-			<h3>
-				Agenda
-			</h3>
+  <slide>
+    <hgroup>
+      <h2>Orienta√ß√£o a Objetos</h2>
+      <h3 class='build'><span>Em JS, tudo √© objeto!</span></h3>
+    </hgroup>
+    <article class='build'>
+      <pre class="prettyprint" data-lang="javascript">
 
-			<ul class="build">
-				<li>Javascript: Por que se preocupar?</li>
-				<li>OrientaÁ„o a Objetos</li>
-				<li>Namespaces</li>
-				<li>Objetos Literais</li>
-				<li>Sugest„o de Arquitetura</li>
-				<li>Demos</li>				
-			</ul>
-		</article>
+// dados primitivos
 
-		<article>
-			<header class="segue">
-				<h1>JavaScript</h2>
-				<h2>Por que se preocupar?</h2>
-			</header>		
-		</article>
+<b>var numero = 1;</b>
+numero      // 1
+numero.valueOf();   // 1
+<b>numero.toString();  // "1"</b>
 
-	  <article>		
-		<h3 class="center-text">
-		  JavaScript
-		</h3>
-		<p class="center-text">
-		  Por que se preocupar?
-		</p>		
-        
-		<div class="js-files">
-			<div>
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-			</div>
-		</div>
-		
-		<div class="js-files build">
-			<div>
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-			</div>
-		</div>
-		
-		<div class="js-files build">
-			<div>
-				<img src="images/html_file.png" />
-				<img src="images/html_file.png" />
-				<img src="images/html_file.png" />
-				<img src="images/html_file.png" />
-				<img src="images/html_file.png" />
-				<img src="images/html_file.png" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" class="invisible" />
-				<img src="images/html_file.png" />
-				<img src="images/html_file.png" />
-				<img src="images/html_file.png" />						
-				<img src="images/html_file.png" />				
-				<img src="images/html_file.png" />
-				<img src="images/html_file.png" />
-			</div>
-		</div>
-		
-		<div class="js-files build">
-			<div class="js-files-last-content">
-				<div>
-					<img src="images/html_file.png" />					
-					<img src="images/arrow-right.png" id="arrow" />
-					<img src="images/js_file.png" />
-				</div>
-			</div>
-		</div>
-		
-		<div class="js-files build">
-			<div>
-				<img src="images/js_file.png" />
-				<img src="images/js_file.png" />
-				<img src="images/js_file.png" />
-				<img src="images/js_file.png" />
-				<img src="images/js_file.png" />
-				<img src="images/js_file.png" />
-				<img src="images/js_file.png" />
-				<img src="images/js_file.png" />
-				<img src="images/js_file.png" />
-				<img src="images/js_file.png" />
-				<img src="images/js_file.png" />
-				<img src="images/js_file.png" />						
-				<img src="images/js_file.png" />				
-				<img src="images/js_file.png" />
-				<img src="images/js_file.png" />
-			</div>
-		</div>
-		
-      </article>
-	  
-		<article>
-			<h3 class="center-text margin-top-3">
-				E o que fazer?
-			</h3>	
-			<p class="center-text build">
-				<span>Organizar o cÛdigo lÛgica e estruturalmente.</span>
-			</p>		
-		</article>
+// fun√ß√µes
 
-		<article>
-			<h3>
-				Logicamente
-			</h3>
+<b>var funcao = function () { alert("funcao foi chamada"); };</b>
+funcao();     // alert: funcao foi chamada
+<b>funcao.toString();  // "function () { alert("funcao foi chamada"); }"</b>
 
-			<ul class="build">
-				<li>OrientaÁ„o a Objetos</li>
-				<li>Namespaces</li>
-				<li>Boas pr·ticas</li>          
-			</ul>
 
-			<br />
+</pre>
+    </article>
+  </slide>
 
-			<h3 class="build">
-				<span>Estruturalmente</span>
-			</h3>
+  <slide>
+    <hgroup>
+      <h2>Orienta√ß√£o a Objetos</h2>
+      <h3 class='build'><span>Em JS, utiliza-se a mesma ideia das linguagens cl√°ssicas</span></h3>
+    </hgroup>
+    <article>
+      <ul class='build'>
+        <li>Objetos com membros p√∫blicos e privados</li>
+        <li>Heran√ßa</li>
+        <li>At√© polimorfismo!</li>
+      </ul>
+    </article>
+  </slide>
 
-			<ul class="build">
-				<li>Convencionando a organizaÁ„o do cÛdigo em pastas e arquivos</li>
-			</ul>
-		</article>
+  <slide>
+    <hgroup class="flexbox vcenter">
+      <h2 class="center-text">Ok, vamos usar OO.</h2> 
+      <h3 class='build'><span>Mas ainda pode haver desorganiza√ß√£o no c√≥digo, como resolver isso?</span></h3>
+      <h3 class='build blue3'><span><b>Usando Namespaces!</b></span></h3>
+    </hgroup>
+  </slide>
 
-		<article>
-			<header class="segue">
-				<h1>OrientaÁ„o a Objetos</h1>
-				<h2>Em javascript?!</h2>
-			</header>        		
-		</article>
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Namespaces</h2>
+      <h3>Mais esse no JavaScript?!</h3>
+    </hgroup>
+  </slide>
 
-		<article class="smaller">
-			<h3>OrientaÁ„o a Objetos</h3>
-			
-			<p class="build">
-				<span>No JS, tudo È objeto!</span>
-			</p>
-			
-			<section class="build smaller">
-				<pre>
-&lt;script type='text/javascript'&gt;
+  <slide>
+    <hgroup>
+      <h2>Namespaces</h2>
+      <h3><span>O que √©?</span></h3>
+    </hgroup>
+    <article>
+      <ul class='build'>
+        <li>T√©cnica empregada para evitar colis√µes de nomes de classes/objetos em um contexto global</li>
+        <li>√â a mesma id√©ia do <b class="blue3">namespace</b> no C# e do <b class="blue3">pacote</b> no  Java</li>
+      </ul>
+    </article>
+  </slide>
 
-	// dados primitivos
+  <slide>
+    <hgroup>
+      <h2>Namespaces</h2>
+      <h3><span>Por que usar?</span></h3>
+    </hgroup>
+    <article>
+      <ul class='build'>
+        <li>Separa as classes/objetos em grupos de mesmo interesse</li>
+        <li>Facilita a manuten√ß√£o</li>
+      </ul>
+    </article>
+  </slide>
 
-	var numero = 1;
-	
-	numero 			// 1
-	numero.valueOf(); 	// 1
-	numero.toString();	// "1"
-	
-	
-	// funÁıes
-	
-	var funcao = function () { alert("funcao foi chamada"); };
-	
-	funcao(); 		// alert: funcao foi chamada
-	funcao.toString(); 	// "function () { alert("funcao foi chamada"); }"
+  <slide>
+    <hgroup>
+      <h2>Namespaces</h2>
+      <h3><span>Como usar?</span></h3>
+    </hgroup>
+    <article>
+      <ul class='build'>
+        <li>Atrav√©s de Objetos Literais - <b>l√≥gica</b></li>
+        <li>Estrutura√ß√£o de pastas e arquivos - <b>estrutura</b></li>
+      </ul>
+    </article>
+  </slide>
 
-&lt;/script'&gt;
-				</pre>
-			</section>
-			
-		</article>
-	  
-		<article class="smaller">
-			<h3>
-				OrientaÁ„o a Objetos
-			</h3>
-			
-			<br />
-			
-			<p class="build">
-				<span>Utiliza a mesma idÈia das linguagens cl·ssicas</span>
-			</p>
-			
-			<ul class="build">				
-				<li>Objetos com membros p˙blicos e privados</li>
-				<li>HeranÁa</li>
-				<li>AtÈ polimorfismo!</li>
-			</ul>
-		</article>
+  <slide>
+    <hgroup>
+      <h2>Objetos Literais</h2>
+      <h3><span>O que s√£o?</span></h3>
+    </hgroup>
+    <article>
+      <ul class='build'>
+        <li>Um conjunto de pares nome/valor separados por v√≠rgula que est√£o contidos num bloco</li>
+        <li><b>Nome</b>: qualquer nome v√°lido na linguagem JS</li>
+        <li><b>Valores</b>: <span class="blue">dados primitivos</span>, <span class="blue">m√©todos</span>/<span class="blue">fun√ß√µes</span> e outros <span class="blue">objetos literais</span></li>
+      </ul>
+    </article>
+  </slide>
 
-		<article>
-			<h3 class="center-text margin-top-3">
-				OK, vamos usar OO! 
-				<br />
-				Mas ainda pode haver desorganizaÁ„o no cÛdigo, 
-				<br />
-				como resolver isso?
-			</h3>	
-			<p class="center-text build">
-				<span>Usando Namespaces!</span>
-			</p>		
-		</article>
-		
-		<article>
-			<header class="segue">
-				<h1>Namespaces</h1>
-				<h2>Mais esse no javascript?!</h2>
-			</header>        		
-		</article>
-		
-		<article class="smaller">
-			<h3>
-				Namespaces
-			</h3>
-			
-			<br />
-			
-			<p>
-				O que È?
-			</p>			
-			<ul class="build">
-				<li>TÈcnica empregada para evitar colisıes de nomes de classes em um contexto global.</li>
-				<li>… a mesma idÈia do <b class="blue">namespace</b> no C# e do <b class="blue">pacote</b> no  Java.</li>
-			</ul>
+  <slide>
+    <hgroup>
+      <h2>Objetos Literais</h2>
+      <h3><span>Exemplo</span></h3>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+// objeto literal
 
-			<br />
-			
-			<p class="build">
-				<span>Por que usar?</span>
-			</p>
-			<ul class="build">
-				<li>Separa as classes em grupos de mesmo interesse.</li>
-				<li>Facilita a manutenÁ„o.</li>
-			</ul>
-			
-		</article>
-		
-		<article class="smaller">
-			<h3>
-				Namespaces
-			</h3>
+var pessoa = {
+  nome: 'Fulano',
+  idade: 25,
+  endereco: {
+    rua: 'Av. S√£o Paulo',
+    numero: 1000,
+    bairro: 'Centro',
+    toString: function () {
+      console.log(this.rua + ', ' + this.numero + ' - ' + this.bairro);
+    }
+  },
+  toString: function () { console.log(this.nome + ', ' + this.idade); }
+};
+</pre>
+    </article>
+  </slide>
 
-			<br />
-			
-			<p>Como usar?</p>
-			
-			<ul class="build">
-				<li>AtravÈs de Objetos Literais</li>
-				<li>EstruturaÁ„o de pastas e arquivos</li>				
-			</ul>
-		</article>
-		
-		<article class="smaller">
-			<!--<header class="title-subtitle">
-				<h1>Namespaces</h1>
-				<h2>Objetos Literais</h2>
-			</header>-->
-			<h3>Objetos Literais</h3>
+  <slide>
+    <hgroup>
+      <h2>Objetos Literais</h2>
+      <h3><span>Exemplo (continua√ß√£o)</span></h3>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
 
-			<br />
-			
-			<p>O que s„o?</p>
-			
-			<ul class="build">
-				<li>Grosseiramente falando, um conjunto de pares nome/valor separados por vÌrgula que est„o contidos num bloco.</li>
-				<li><b>Nome</b>: qualquer nome v·lido no JS</li>
-				<li>
-					<b>Valores</b> podem ser: <b class="blue">dados primitivos</b>, <b class="blue">mÈtodos</b> e <b class="blue">outros objetos literais</b>.					
-				</li>				
-			</ul>		
-		</article>
-		
-		<article class="smaller">			
-			<h3>Objetos Literais</h3>
-		
-			<p>Exemplo</p>
-		
-			<section>
-				<pre>
-&lt;script type='text/javascript'&gt;
+// acessando propriedades
 
-	// objeto literal
+pessoa.nome   // "Fulano"
+pessoa.idade    // 25 
+pessoa.endereco.rua // "Av. S√£o Paulo"
 
-	var pessoa = {
-		nome: 'Fulano',
-		idade: 25,
-		endereco: {
-			rua: 'Av. S„o Paulo',
-			numero: 1000,
-			bairro: 'Centro',
-			toString: function () {
-				alert(this.rua + ', ' + this.numero + ' - ' + 
-				      this.bairro);
-			}
-		},
-		toString: function () {	alert(this.nome + ', ' + this.idade); }
-	};
+// acessando metodos
 
-&lt;/script'&gt;
-				</pre>
-			</section>
-		</article>
-		
-		<article class="smaller">			
-			<h3>Objetos Literais</h3>
-		
-			<p>Exemplo</p>
-		
-			<section>
-				<pre>
-&lt;script type='text/javascript'&gt;
+pessoa.toString();    // alert: Fulano, 25
+pessoa.endereco.toString(); // alert: Av. S√£o Paulo, 1000 - Centro
 
-	// acessando propriedades
 
-	pessoa.nome		// "Fulano"
-	pessoa.idade		// 25	
-	pessoa.endereco.rua	// "Av. S„o Paulo"
-	
-	
-	// acessando metodos
-	
-	pessoa.toString();		// alert: Fulano, 25
-	pessoa.endereco.toString();	// alert: Av. S„o Paulo, 1000 - Centro
+</pre>
+    </article>
+  </slide>
 
-&lt;/script'&gt;
-				</pre>
-			</section>
-		</article>
-		
-		<article class="smaller">			
-			<h3>Namespaces</h3>
-		
-			<p>Implementando um namespace</p>
-		
-			<section>
-				<pre>
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Let's code!</h2>
+      <h3>Hands-on</h3>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Namespaces</h2>
+      <h3>Implementa√ß√£o</h3>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+
 // Objeto global - Namespace raiz
 
-MyApp = {
-	Component: {},	// Namespace para plugins
-	Script: {}	// Namespace para configurar comportamentos
+MeuAplicativo = {
+  Plugin: {},  // Namespace para plugins
+  Comportamento: {}  // Namespace para configurar comportamentos
 };
-				</pre>				
-			</section>
-			<span class="code-info">Namespace.js</span>
-		</article>
-			
-		<article class="smaller">
-			<h3>Namespaces</h3>
-			
-			<p>Objeto que encapsula um plugin qualquer</p>
-			
-			<section>
-				<pre>
+
+
+</pre>
+<span class="code-info gray2"><i>namespace.js</i></span>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Namespaces</h2>
+      <h3>Plugin</h3>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+
 // Objeto que encapsula um plugin qualquer
 
-MyApp.Component.Tabela = function (idElemento) {	
-	this.tabela = $('#' + idElemento).dataTables();	
+MeuAplicativo.Plugin.Tabela = function (idElemento) {  
+  this.tabela = $('#' + idElemento).dataTables(); 
 };
 
-MyApp.Component.Tabela.prototype.limparTabela = function () {		
-	this.tabela.fnClearTable();
-};
-				</pre>				
-			</section>
-			<span class="code-info">Tabela.js</span>
-		</article>
-			
-		<article class="smaller">
-			<h3>Namespaces</h3>
-		
-			<p>ConfiguraÁ„o de comportamentos</p>
-		
-			<section>
-				<pre>
-// Objeto que configura os comportamentos de uma p·gina
-
-MyApp.Script.UsuarioScript = function () {
-
-	var that = this;
-	var tabela = new MyApp.Component.Tabela("usuario-grid");
-
-	that.limparTabela = function (event) {
-		event.preventDefault();
-		tabela.limparTabela();
-	};
+MeuAplicativo.Plugin.Tabela.prototype.limparTabela = function () {   
+  this.tabela.fnClearTable();
 };
 
-$(function () {	
-	var script = new MyApp.Script.UsuarioScript();
-	
-	// LigaÁıes de eventos
-	
-	$('a.limparTabela').click(script.limparTabela);	
+
+</pre>
+<span class="code-info gray2"><i>tabelaPlugin.js</i></span>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Namespaces</h2>
+      <h3>Comportamento</h3>
+    </hgroup>
+    <article class='smaller'>
+      <pre class="prettyprint" data-lang="javascript">
+// Objeto que configura os comportamentos de uma p√°gina
+MeuAplicativo.Comportamento.UsuarioIndex = function () {
+  var that = this;
+  var tabela = new MeuAplicativo.Plugin.Tabela("usuario-grid");
+
+  that.limparTabela = function (event) {
+    event.preventDefault();
+    tabela.limparTabela();
+  };
+};
+
+// Usando jQuery para iniciar a execu√ß√£o do c√≥digo
+$(function () { 
+  var script = new MeuAplicativo.Comportamento.UsuarioIndex();
+  
+  // Bind de eventos
+  $('a.limparTabela').click(script.limparTabela); 
 });
-				</pre>
-			</section>
-			
-			<span class="code-info">UsuarioScript.js</span>
-		</article>		
-		
-		<!--<article class="smaller">			
-			<h3>Namespaces</h3>
-		
-			<p>Sugest„o de estrutura</p>
-		
-			<section>
-				<pre>
-// Objeto global - Namespace raiz
-
-MyApp = {
-	Componente: {},	// Plugins
-	
-	Elemento: {},	// Elementos da p·gina
-	
-	ViewModel: {},	// Agrupamento de todos os elementos 
-			// e informaÁıes extras da p·gina
-			
-	Script: {}	// LigaÁ„o de eventos
-};
-				</pre>				
-			</section>
-			<span class="code-info">Namespace.js</span>
-		</article>-->
-		
-		<article>
-			<h3>Arquitetura</h3>
-			
-			<p>Antes</p>
-			
-			<div id="before-diagram" class="build">
-				<img src="images/plugins-behav-diagram.png" />
-				<img src="images/right-arrow_plugins-behav-diagram.png" id="right-arrow" />
-				<img src="images/html_file.png" id="html-file" />
-				<img src="images/down-arrow.png" id="small-right-arrow" />
-				<img src="images/js_file.png" id="js-file" />
-			</div>
-			
-			<div id="before-diagram-legend" class="build">
-				<p>Sem OO</p>
-				<p>Sem Namespaces</p>
-				<p>Sem organizaÁ„o estrutural</p>
-			</div>
-		</article>
-		
-		<article>
-			<h3>Arquitetura</h3>
-			
-			<p>Depois</p>
-			
-			<div id="after-diagram" class="build">
-				<figure class="diagram">
-					<img src="images/namespaces-diagram.png" />				
-					<figcaption>Diagrama de Namespaces</figcaption>
-				</figure>
-			</div>			
-			
-			<!--<div id="before-diagram-legend" class="build">
-				<p>Sem OO</p>
-				<p>Sem Namespaces</p>
-				<p>Sem organizaÁ„o estrutural</p>
-			</div>-->
-		</article>
-		
-		<article>
-			<h3>Estrutura de Arquivos e Pastas</h3>
-
-			<section class="dir-struct start">
-				
-				<header>InÌcio</header>
-				
-				<div>
-					<div class="scripts">
-						<figure>
-							<img src="images/diretorio.png" />
-							<figcaption>Scripts</figcaption>
-						</figure>
-					</div>
-				</div>				
-				
-				<figure>
-					<img src="images/down-arrow.png" />
-				</figure>
-				
-				<div>
-					<div class="app">
-						<figure>
-							<img src="images/diretorio.png" />
-							<figcaption>App</figcaption>
-						</figure>
-					</div>
-				</div>
-
-				<figure>
-					<img src="images/down-arrow.png" />
-				</figure>
-				
-				<div>		
-					<div class="app-children">
-						<figure class="go-to-main">
-							<img src="images/diretorio.png" />
-							<figcaption>Main</figcaption>
-						</figure>
-					
-						<figure class="go-to-componentes">
-							<img src="images/diretorio.png" />
-							<figcaption>Componentes</figcaption>
-						</figure>
-						
-						<figure class="go-to-views last">
-							<img src="images/diretorio.png" />
-							<figcaption>Views</figcaption>
-						</figure>
-					</div>
-				</div>
-			</section>
-						
-			<section class="dir-struct views" style="display: none;">
-			
-				<header>
-					<img src="images/round_arrow_left.png" class="back-to views-to-start" />
-					Views
-				</header>
-										
-				<div>
-					<div class="views-root">
-						<figure>
-							<img src="images/diretorio.png" />
-							<figcaption>Views</figcaption>
-						</figure>
-					</div>
-				</div>
-				
-				<figure>
-					<img src="images/down-arrow.png" />
-				</figure>
-				
-				<div>
-					<div class="views-children">
-						<figure class="go-to-view-usuario">
-							<img src="images/diretorio.png" />
-							<figcaption>Usuario</figcaption>
-						</figure>
-						
-						<figure class="go-to-view-grupo last">
-							<img src="images/diretorio.png" />
-							<figcaption>Grupo</figcaption>
-						</figure>
-					</div>
-				</div>				
-			</section>
-			
-			<section class="dir-struct view-usuario" style="display: none;">
-			
-				<header>
-					<img src="images/round_arrow_left.png" class="back-to view-usuario-to-views" />
-					View Usuario
-				</header>
-										
-				<div>
-					<div class="view-usuario-root">
-						<figure>
-							<img src="images/diretorio.png" />
-							<figcaption>Usuario</figcaption>
-						</figure>
-					</div>
-				</div>
-				
-				<figure>
-					<img src="images/down-arrow.png" />
-				</figure>	
-				
-				<div>
-					<div class="top-namespaces">
-						<figure class="show-view-usuario-elementos-children">
-							<img src="images/diretorio.png" />
-							<figcaption>Elementos</figcaption>
-						</figure>					
-						
-						<figure class="show-view-usuario-viewmodel-children">
-							<img src="images/diretorio.png" />
-							<figcaption>ViewModel</figcaption>
-						</figure>
-						
-						<figure class="show-view-usuario-script-children last">
-							<img src="images/diretorio.png" />
-							<figcaption>Script</figcaption>
-						</figure>
-					</div>
-				</div>
-				
-				<figure class="down-arrow-view-usuario" style="display:none;">
-					<img src="images/down-arrow.png" />
-				</figure>
-				
-				<div>
-					<div class="view-usuario-elementos-children" style="display:none;">
-						<figure>
-							<img src="images/js_file.png" class="js-file" />
-							<figcaption>FormUsuario.js</figcaption>
-						</figure>						
-						
-						<figure class="last">
-							<img src="images/js_file.png" class="js-file" />
-							<figcaption>TabelaDeUsuarios.js</figcaption>
-						</figure>
-					</div>
-					
-					<div class="view-usuario-viewmodel-children" style="display:none;">
-						<figure class="last">
-							<img src="images/js_file.png" class="js-file" />
-							<figcaption>UsuarioViewModel.js</figcaption>
-						</figure>
-					</div>
-					
-					<div class="view-usuario-script-children" style="display:none;">
-						<figure class="last">
-							<img src="images/js_file.png" class="js-file" />
-							<figcaption>UsuarioScript.js</figcaption>
-						</figure>
-					</div>
-				</div>
-			</section>
-			
-			<section class="dir-struct view-grupo" style="display: none;">
-			
-				<header>
-					<img src="images/round_arrow_left.png" class="back-to view-grupo-to-views" />
-					View Grupo
-				</header>
-										
-				<div>
-					<div class="view-grupo-root">
-						<figure>
-							<img src="images/diretorio.png" />
-							<figcaption>Grupo</figcaption>
-						</figure>
-					</div>
-				</div>
-				
-				<figure>
-					<img src="images/down-arrow.png" />
-				</figure>				
-				<div>
-					<div class="top-namespaces">
-						<figure>
-							<img src="images/diretorio.png" />
-							<figcaption>Elementos</figcaption>
-						</figure>					
-						
-						<figure>
-							<img src="images/diretorio.png" />
-							<figcaption>ViewModel</figcaption>
-						</figure>
-						
-						<figure class="last">
-							<img src="images/diretorio.png" />
-							<figcaption>Script</figcaption>
-						</figure>
-					</div>
-				</div>
-			</section>
-			
-			<section class="dir-struct componentes" style="display: none;">
-			
-				<header>
-					<img src="images/round_arrow_left.png" class="back-to componentes-to-start" />
-					Componentes
-				</header>
-										
-				<div>
-					<div class="componentes-root">
-						<figure>
-							<img src="images/diretorio.png" />
-							<figcaption>Componentes</figcaption>
-						</figure>
-					</div>
-				</div>
-				
-				<figure>
-					<img src="images/down-arrow.png" />
-				</figure>
-				
-				<div>
-					<div class="componentes-children">
-						<figure>
-							<img src="images/js_file.png" class="js-file" />
-							<figcaption>Tabela.js</figcaption>
-						</figure>
-						
-						<figure>
-							<img src="images/js_file.png" class="js-file" />
-							<figcaption>Slider.js</figcaption>
-						</figure>
-						
-						<figure>
-							<img src="images/js_file.png" class="js-file" />
-							<figcaption>Tabs.js</figcaption>
-						</figure>
-						
-						<figure class="last">
-							<img src="images/js_file.png" class="js-file" />
-							<figcaption>Dialog.js</figcaption>
-						</figure>
-					</div>
-				</div>
-			</section>
-			
-			<section class="dir-struct main" style="display: none;">
-			
-				<header>
-					<img src="images/round_arrow_left.png" class="back-to main-to-start" />
-					Main
-				</header>
-										
-				<div>
-					<div class="main-root">
-						<figure>
-							<img src="images/diretorio.png" />
-							<figcaption>Main</figcaption>
-						</figure>
-					</div>
-				</div>
-				
-				<figure>
-					<img src="images/down-arrow.png" />
-				</figure>
-				
-				<div>
-					<div class="main-children">
-						<figure>
-							<img src="images/js_file.png" class="js-file" />
-							<figcaption>Namespaces.js</figcaption>
-						</figure>
-						
-						<figure class="last">
-							<img src="images/js_file.png" class="js-file" />
-							<figcaption>MainScript.js</figcaption>
-						</figure>
-					</div>
-				</div>				
-			</section>
-		</article>
-      
-      <!--<article class='smaller'>
-        <h3>
-          Slide with a table (smaller text)
-        </h3>
-        
-        <table>
-          <tr>
-            <th>
-              Name
-            <th>
-              Occupation
-          <tr>
-            <td>
-              Luke MahÈ
-            <td>
-              V.P. of Keepiní It Real
-          <tr>
-            <td>
-              Marcin Wichary
-            <td>
-              The Michael Bay of Doodles
-        </table>
-      </article>
-      
-      <article>
-        <h3>
-          Styles
-        </h3>
-        <ul>
-          <li>
-            <span class='red'>class="red"</span>
-          <li>
-            <span class='blue'>class="blue"</span>
-          <li>
-            <span class='green'>class="green"</span>
-          <li>
-            <span class='yellow'>class="yellow"</span>
-          <li>
-            <span class='black'>class="black"</span>
-          <li>
-            <span class='white'>class="white"</span>
-          <li>
-            <b>bold</b> and <i>italic</i>
-        </ul>
-      </article>
-      
-      <article>
-        <h2>
-          Segue slide
-        </h2>
-      </article>
-
-      <article>
-        <h3>
-          Slide with an image
-        </h3>
-        <p>
-          <img style='height: 500px' src='images/example-graph.png'>
-        </p>
-        <div class='source'>
-          Source: Sergey Brin
-        </div>
-      </article>
-
-      <article>
-        <h3>
-          Slide with an image (centered)
-        </h3>
-        <p>
-          <img class='centered' style='height: 500px' src='images/example-graph.png'>
-        </p>
-        <div class='source'>
-          Source: Larry Page
-        </div>
-      </article>
-
-      <article class='fill'>
-        <h3>
-          Image filling the slide (with optional header)
-        </h3>
-        <p>
-          <img src='images/example-cat.jpg'>
-        </p>
-        <div class='source white'>
-          Source: Eric Schmidt
-        </div>
-      </article>
-
-      <article>
-        <h3>
-          This slide has some code
-        </h3>
-        <section>
-        <pre>
-&lt;script type='text/javascript'&gt;
-  // Say hello world until the user starts questioning
-  // the meaningfulness of their existence.
-  function helloWorld(world) {
-    for (var i = 42; --i &gt;= 0;) {
-      alert('Hello ' + String(world));
-    }
-  }
-&lt;/script&gt;
-&lt;style&gt;
-  p { color: pink }
-  b { color: blue }
-  u { color: 'umber' }
-&lt;/style&gt;
 </pre>
-        </section>
-      </article>
+<span class="code-info gray2"><i>usuarioIndex.js</i></span>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Arquitetura</h2>
+      <h3>Antes</h3>
+    </hgroup>
+    <article>
+      <div id="before-diagram" class="build">
+        <img src="images/plugins-behav-diagram.png" />
+        <img src="images/right-arrow_plugins-behav-diagram.png" id="right-arrow" />
+        <img src="images/html_file.png" id="html-file" />
+        <img src="images/down-arrow.png" id="small-right-arrow" />
+        <img src="images/js_file.png" id="js-file" />
+      </div>
       
-      <article class='smaller'>
-        <h3>
-          This slide has some code (small font)
-        </h3>
-        <section>
-        <pre>
-&lt;script type='text/javascript'&gt;
-  // Say hello world until the user starts questioning
-  // the meaningfulness of their existence.
-  function helloWorld(world) {
-    for (var i = 42; --i &gt;= 0;) {
-      alert('Hello ' + String(world));
-    }
-  }
-&lt;/script&gt;
-&lt;style&gt;
-  p { color: pink }
-  b { color: blue }
-  u { color: 'umber' }
-&lt;/style&gt;
-</pre>
-        </section>
-      </article>
-      
-      <article>
-        <q>
-          The best way to predict the future is to invent it.
-        </q>
-        <div class='author'>
-          Alan Kay
-        </div>
-      </article>
-      
-      <article class='smaller'>
-        <q>
-          A distributed system is one in which the failure of a computer 
-          you didnít even know existed can render your own computer unusable.
-        </q>
-        <div class='author'>
-          Leslie Lamport
-        </div>
-      </article>
-      
-      <article class='nobackground'>
-        <h3>
-          A slide with an embed + title
-        </h3>
+      <div id="before-diagram-legend" class="build">
+        <p>Sem OO</p>
+        <p>Sem Namespaces</p>
+        <p>Sem organiza√ß√£o estrutural</p>
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Arquitetura</h2>
+      <h3>Depois</h3>
+    </hgroup>
+    <article id='diagrama-namespaces' class="flexbox vcenter">
+      <img src="images/namespaces-diagram.png" alt="Diagrama de Namespaces" title="Diagrama de Namespaces">
+      <footer class="source">Diagrama de Namespaces</footer>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Estrutura</h2>
+      <h3>Arquivos e Pastas</h3>
+    </hgroup>
+    <article class="flexbox vcenter no-margin">
+      <section class="dir-struct start">
         
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
-      </article>
+        <header>In√≠cio</header>
+        
+        <div>
+          <div class="scripts">
+            <figure>
+              <img src="images/diretorio.png" />
+              <figcaption>Scripts</figcaption>
+            </figure>
+          </div>
+        </div>        
+        
+        <figure>
+          <img src="images/down-arrow.png" />
+        </figure>
+        
+        <div>
+          <div class="app">
+            <figure>
+              <img src="images/diretorio.png" />
+              <figcaption>App</figcaption>
+            </figure>
+          </div>
+        </div>
 
-      <article class='nobackground'>
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
-      </article>
+        <figure>
+          <img src="images/down-arrow.png" />
+        </figure>
+        
+        <div>   
+          <div class="app-children">
+            <figure class="go-to-main">
+              <img src="images/diretorio.png" />
+              <figcaption>Main</figcaption>
+            </figure>
+          
+            <figure class="go-to-componentes">
+              <img src="images/diretorio.png" />
+              <figcaption>Componentes</figcaption>
+            </figure>
+            
+            <figure class="go-to-views last">
+              <img src="images/diretorio.png" />
+              <figcaption>Views</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+            
+      <section class="dir-struct views" style="display: none;">
+      
+        <header>
+          <img src="images/round_arrow_left.png" class="back-to views-to-start" />
+          Views
+        </header>
+                    
+        <div>
+          <div class="views-root">
+            <figure>
+              <img src="images/diretorio.png" />
+              <figcaption>Views</figcaption>
+            </figure>
+          </div>
+        </div>
+        
+        <figure>
+          <img src="images/down-arrow.png" />
+        </figure>
+        
+        <div>
+          <div class="views-children">
+            <figure class="go-to-view-usuario">
+              <img src="images/diretorio.png" />
+              <figcaption>Usuario</figcaption>
+            </figure>
+            
+            <figure class="go-to-view-grupo last">
+              <img src="images/diretorio.png" />
+              <figcaption>Grupo</figcaption>
+            </figure>
+          </div>
+        </div>        
+      </section>
+      
+      <section class="dir-struct view-usuario" style="display: none;">
+      
+        <header>
+          <img src="images/round_arrow_left.png" class="back-to view-usuario-to-views" />
+          View Usuario
+        </header>
+                    
+        <div>
+          <div class="view-usuario-root">
+            <figure>
+              <img src="images/diretorio.png" />
+              <figcaption>Usuario</figcaption>
+            </figure>
+          </div>
+        </div>
+        
+        <figure>
+          <img src="images/down-arrow.png" />
+        </figure> 
+        
+        <div>
+          <div class="top-namespaces">
+            <figure class="show-view-usuario-elementos-children">
+              <img src="images/diretorio.png" />
+              <figcaption>Elementos</figcaption>
+            </figure>         
+            
+            <figure class="show-view-usuario-viewmodel-children">
+              <img src="images/diretorio.png" />
+              <figcaption>ViewModel</figcaption>
+            </figure>
+            
+            <figure class="show-view-usuario-script-children last">
+              <img src="images/diretorio.png" />
+              <figcaption>Script</figcaption>
+            </figure>
+          </div>
+        </div>
+        
+        <figure class="down-arrow-view-usuario" style="display:none;">
+          <img src="images/down-arrow.png" />
+        </figure>
+        
+        <div>
+          <div class="view-usuario-elementos-children" style="display:none;">
+            <figure>
+              <img src="images/js_file.png" class="js-file" />
+              <figcaption>FormUsuario.js</figcaption>
+            </figure>           
+            
+            <figure class="last">
+              <img src="images/js_file.png" class="js-file" />
+              <figcaption>TabelaDeUsuarios.js</figcaption>
+            </figure>
+          </div>
+          
+          <div class="view-usuario-viewmodel-children" style="display:none;">
+            <figure class="last">
+              <img src="images/js_file.png" class="js-file" />
+              <figcaption>UsuarioViewModel.js</figcaption>
+            </figure>
+          </div>
+          
+          <div class="view-usuario-script-children" style="display:none;">
+            <figure class="last">
+              <img src="images/js_file.png" class="js-file" />
+              <figcaption>UsuarioScript.js</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+      
+      <section class="dir-struct view-grupo" style="display: none;">
+      
+        <header>
+          <img src="images/round_arrow_left.png" class="back-to view-grupo-to-views" />
+          View Grupo
+        </header>
+                    
+        <div>
+          <div class="view-grupo-root">
+            <figure>
+              <img src="images/diretorio.png" />
+              <figcaption>Grupo</figcaption>
+            </figure>
+          </div>
+        </div>
+        
+        <figure>
+          <img src="images/down-arrow.png" />
+        </figure>       
+        <div>
+          <div class="top-namespaces">
+            <figure>
+              <img src="images/diretorio.png" />
+              <figcaption>Elementos</figcaption>
+            </figure>         
+            
+            <figure>
+              <img src="images/diretorio.png" />
+              <figcaption>ViewModel</figcaption>
+            </figure>
+            
+            <figure class="last">
+              <img src="images/diretorio.png" />
+              <figcaption>Script</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+      
+      <section class="dir-struct componentes" style="display: none;">
+      
+        <header>
+          <img src="images/round_arrow_left.png" class="back-to componentes-to-start" />
+          Componentes
+        </header>
+                    
+        <div>
+          <div class="componentes-root">
+            <figure>
+              <img src="images/diretorio.png" />
+              <figcaption>Componentes</figcaption>
+            </figure>
+          </div>
+        </div>
+        
+        <figure>
+          <img src="images/down-arrow.png" />
+        </figure>
+        
+        <div>
+          <div class="componentes-children">
+            <figure>
+              <img src="images/js_file.png" class="js-file" />
+              <figcaption>Tabela.js</figcaption>
+            </figure>
+            
+            <figure>
+              <img src="images/js_file.png" class="js-file" />
+              <figcaption>Slider.js</figcaption>
+            </figure>
+            
+            <figure>
+              <img src="images/js_file.png" class="js-file" />
+              <figcaption>Tabs.js</figcaption>
+            </figure>
+            
+            <figure class="last">
+              <img src="images/js_file.png" class="js-file" />
+              <figcaption>Dialog.js</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+      
+      <section class="dir-struct main" style="display: none;">
+      
+        <header>
+          <img src="images/round_arrow_left.png" class="back-to main-to-start" />
+          Main
+        </header>
+                    
+        <div>
+          <div class="main-root">
+            <figure>
+              <img src="images/diretorio.png" />
+              <figcaption>Main</figcaption>
+            </figure>
+          </div>
+        </div>
+        
+        <figure>
+          <img src="images/down-arrow.png" />
+        </figure>
+        
+        <div>
+          <div class="main-children">
+            <figure>
+              <img src="images/js_file.png" class="js-file" />
+              <figcaption>Namespaces.js</figcaption>
+            </figure>
+            
+            <figure class="last">
+              <img src="images/js_file.png" class="js-file" />
+              <figcaption>MainScript.js</figcaption>
+            </figure>
+          </div>
+        </div>        
+      </section>
+    </article>
+  </slide>
 
-      <article class='fill'>
-        <h3>
-          Full-slide embed with (optional) slide title on top
-        </h3>
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
-      </article>-->
+  <slide>
+    <articleclass id='demo' class="flexbox vcenter">
+      <a href="http://modeloivia.apphb.com" target="_blank">DEMO</a>
+      <a href="https://github.com/danilojrr/ModeloIVIA" target="_blank">FONTES</a>
+    </article>
+  </slide>  
 
-		<article>
-			<hgroup class="demo">
-				<h1><a href="http://modeloivia.apphb.com" target="_blank">DEMO</a></h1>
-				<h1><a href="https://github.com/danilojrr/ModeloIVIA" target="_blank">FONTES</a></h1>
-			</hgroup>
-		</article>
-		  
-		<article>
-			<h3>Contatos</h3>
-			
-			<ul>		
-				<li>
-					<img src="images/gmail.jpeg" />
-					<span class="who-link">danilo.junior@ivia.com.br</span>
-				</li>
-				<li>
-					<img src="images/github-black-cat.jpg" />
-					<a href="https://github.com/danilojrr" target="_blank" class="who-link">github.com/danilojrr</a>
-				</li>
-				<li>
-					<img src="images/twitter_bird.png" />
-					<a href="https://twitter.com/danilojrr" target="_blank" class="who-link">@danilojrr</a>
-				</li>
-				<li>
-					<img src="images/link.gif" />
-					<a href="http://danilojrr.github.com" target="_blank" class="who-link-presentation">link desta apresentaÁ„o: danilojrr.github.com</a>
-				</li>
-			</ul>
-		</article>
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/google_developers_icon_128.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>&lt;Obrigado!&gt;</h2>
+      <!--<p>Important contact information goes here.</p>-->
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+  </slide>
 
-		<!--<article>
-			<h3>Obrigado! =]</h3>
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/ivia-logo.png"></span>
+    </article>
+  </slide>
 
-			<ul>
-				<li>
-					<a href='http://www.google.com'>google.com</a>
-				</li>
-			</ul>
-		</article>-->
-		
-    </section>
+  <slide class="backdrop"></slide>
 
-  </body>
+</slides>
+
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+
+<script src="js/jquery-1.5.1.min.js"></script>
+<script src='js/behavior.js'></script>
+
+</body>
 </html>
